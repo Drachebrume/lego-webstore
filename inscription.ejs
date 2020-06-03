@@ -1,0 +1,131 @@
+	<div class="container-fluid p-3 p-md-5">
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-lg-10">
+        	<% if ( status !== 'undefined' ) { %>
+		        <% if ( status === 'success' ) { %>
+		          <div class="alert alert-success">
+		            <h5><strong>Inscription réussie ! </strong>Vous pouvez maintenant vous connecter.</h5>
+		          </div>
+		        <% }; %>
+		        <% if ( status === 'error' ) { %>
+		          <div class="alert alert-danger">
+		            <h5> Erreur d'inscription : l'adresse mail est déjà utilisée.</h5>
+		          </div>
+		        <% }; %>
+		      <% }; %>
+          <h2>Création d'un compte</h2>
+          <div class="progress">
+            <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%" id="progressbar"></div>
+          </div>
+        </div>
+        <div class="col-1"></div>
+      </div>
+
+      <form id="sign" onchange="barrebleue()" method="post" action="/inscription">
+
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-lg-5">
+          <div class="form-group">
+            <br>
+            <label for="lastname">Nom</label>
+            <input type="text" placeholder="Nom" name="lastname" class="form-control" id="lastname">
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="form-group">
+            <br>
+            <label for="firstname">Prénom</label>
+            <input type="text" placeholder="Prénom" name="firstname" class="form-control" id="firstname">
+          </div>
+        </div>
+        <div class="col-1"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-lg-10">
+          <p>Date de naissance</p>
+        </div>
+        <div class="col-1"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-lg-4">
+          <div class="form-group">
+            <select class="form-control" name="day" id="dateNJ">
+              <!--généré automatiquement onload -->
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="form-group">
+            <select class="form-control" name="month" id="dateNM">
+              <!--généré automatiquement onload -->
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="form-group">
+            <select class="form-control" name="year" id="dateNA">
+              <!--généré automatiquement onload -->
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-lg-10">
+          <div class="form-group">
+            <br>
+            <label for="mail">Adresse mail</label>
+            <input type="email" name="email" placeholder="Adresse mail" class="form-control" id="mail">
+          </div>
+        </div>
+        <div class="col-1"></div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-lg-10">
+          <p>Mot de passe <span style="font-size : 12px">(minimum 6 caractères)</span></p>
+        </div>
+        <div class="col-1"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-lg-5">
+          <div class="form-group">
+            <input type="password" name="passwd" placeholder="Mot de passe" class="form-control" id="pswd" onkeyup="forceMDP()">
+            <div class="progress" style="height : 2px">
+              <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:0%" id="barreMDP">
+              </div>
+            </div>
+            <p class="borduremdp" id="forceMDP">f</p>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="form-group">
+            <input type="password" name="psswd" placeholder="Confirmez le mot de passe" class="form-control" id="confirm">
+          </div>
+        </div>
+        <div class="col-1"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-lg-10">
+          <div class="checkbox">
+            <label><input type="checkbox" value="" id="boiboite">Je confirme ces informations</label>
+          </div>
+          <button type="submit" class="btn btn-primary" value="submit">Inscription</button>
+        </div>
+        <div class="col-1"></div>
+      </div>
+
+    </form>

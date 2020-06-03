@@ -1,0 +1,131 @@
+<div class="row pt-5">
+	<div class="col-1"></div>
+	<div class="col-10">
+		<% if ( status !== 'undefined' ) { %>
+	      <% if ( status === 'suppr' ) { %>
+	        <div class="alert alert-success">
+	          <h5>Article supprimé avec succès.</h5>
+	        </div>
+	      <% }; %>
+	      <% if ( status === 'error' ) { %>
+	        <div class="alert alert-danger">
+	          <h5>Vous n'avez pas accès à cette ressource.</h5>
+	        </div>
+	      <% }; %>
+	    <% }; %>
+	</div>
+	<div class="col-1"></div>
+</div>
+<% if ( session.profil == 1 ) { %>
+	<div class="jumbotron jumbotron-fluid" style="background-color : #0099CC; color : white">
+	  <div class="container text-center">
+	    <h1>Mode éditeur</h1>
+	  </div>
+	</div>
+	<div class="row pt-5">
+		<hr>
+		<div class="col-1"></div>
+		<div class="col-lg-5">
+			<form  method="post" enctype="multipart/form-data" action="/upload" name="newEvent">
+				<div class="form-group">
+				    <input type="file" name="filetoupload" id="inputFile">
+				</div>
+				<div class="form-group">
+	    			<textarea type="text" placeholder="Titre de la publication" value="" name="titre" rows="1" class="form-control" id="titre"></textarea>
+				</div>
+				<div class="form-group">
+	    			<textarea type="text" placeholder="Ecrivez ce qui vous passe par la tête !" value="" name="alpha" rows="20" class="form-control" id="alpha"></textarea>
+				</div>
+				<button class="btn btn-primary mt-2" type="submit" value="submit">Créer la publication</button>
+			</form>
+		</div>
+	<div class="col-lg-5">
+		<img id="image_upload_preview" src="http://placehold.it/100x100" alt="Miniature" style="width : 100%" class="img-responsive rounded"/>
+	</div>
+	<div class="col-1"></div>
+</div>
+<hr>
+<% }; %>
+<div class="row pt-5">
+	<div class="col-1"></div>
+	<div class="col-10">
+			<% publica.forEach( pub => { %>
+		        <div class="shadow p-3 mb-5 bg-white rounded text">
+			        <div class="row">
+			          <div class="col-xl-6">
+			          	<div class="collapse show" id="hideimg<%=pub.id%>">
+			            	<img src="<%= pub.image %>" class="rounded float-left w-100">
+			            </div>
+			            <div class="collapse" id="showimg<%=pub.id%>">
+			            	<img src="/images/modif.jpg" width="100%">
+			            </div>
+			          </div>
+			          <div class="col-xl-6">
+			          	<% if ( session.profil == 1 ) { %>
+			          			<button class="btn btn-danger float-right" data-toggle="collapse" data-target="#verif<%=pub.id%>">
+			          				Supprimer <i class="fa fa-window-close" aria-hidden="true"></i>
+			          			</button>
+			          			<button class="btn btn-primary" data-toggle="collapse" data-target="#hidepub<%=pub.id%>,#showpub<%=pub.id%>,#hideimg<%=pub.id%>,#showimg<%=pub.id%>">Modifier</button>
+			          			<div class="collapse" id="verif<%=pub.id%>">
+			          			<br>
+			          				<div class="alert alert-danger">
+			          					<h5>Voulez-vous vraiment supprimer cette publication ?</h5>
+			          					<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#verif<%=pub.id%>">Non</button>
+			          					<form method="post" action="/supprpub/<%=pub.id%>" style="display : inline">
+			          						<button type="submit" class="btn btn-danger float-right">Oui j'en suis sûr</button>
+			          					</form>
+			          				</div>
+			          			</div>
+			          		
+			          		<hr>
+			          	<% }; %>
+			          	<div class="collapse show" id="hidepub<%=pub.id%>">
+			          		<h2><%= pub.title %></h2>
+			            	<span style="white-space: pre-wrap">
+			            	<%= pub.description %>
+			            	</span>
+			            </div>
+
+			            <div class="collapse" id="showpub<%=pub.id%>">
+			          		<form  method="post" enctype="multipart/form-data" action="/updatepub/<%=pub.id%>" name="updatepub">
+								<div class="form-group">
+								    <input type="file" name="filetoupload" value="test" id="inputFile<%=pub.id%>" required>
+								</div>
+								<div class="form-group">
+					    			<textarea type="text" placeholder="Titre de la publication" name="titremodif" rows="1" class="form-control"><%= pub.title %></textarea>
+								</div>
+								<div class="form-group">
+					    			<textarea type="text" placeholder="Ecrivez ce qui vous passe par la tête !" name="descmodif" rows="10" class="form-control"><%= pub.description %></textarea>
+								</div>
+								<button class="btn btn-primary mt-2" type="submit" value="submit">Envoyer la modification</button>
+							</form>
+			            </div>
+			            
+			          </div>
+			        </div>
+			    </div>
+		    <% }); %>
+	</div>
+	<div class="col-1"></div>
+</div>
+
+<!--SCRIPT------------------------------------->
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#image_upload_preview').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#inputFile").change(function () {
+        readURL(this);
+    });
+
+
+</script>

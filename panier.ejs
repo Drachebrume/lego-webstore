@@ -1,0 +1,74 @@
+<div class="container-fluid p-3 p-md-5">
+  <div class="row panier">
+    <div class="col-1"></div>
+    <div class="col-lg-5">
+      <ul class="list-group">
+        <li class="list-group-item" id="article1">
+          <img class="floatleft imgpanier" src="/images/produit_newyork_0.jpeg" width="20%">
+          <p style="float : none">
+            Lego Architecture
+            <br>
+            <strong>New York City</strong><br>
+            <em>Quantité : <span id="qte1">1</span></em>
+          </p>
+          <div class="float-right negatif" style="font-size : 40px">
+            <p><span id="prix1">49.99€</span></p>
+            <button type="button" class="btn btn-danger suppr" style="margin-top : 70px" onclick="supprimer(this.id)" id="suppr1">Supprimer <i class="fa fa-trash" aria-hidden="true"></i></button>
+          </div>
+        </li>
+        <li class="list-group-item" id="article2">
+          <img class="floatleft imgpanier" src="/images/produit_londres_0.jpeg" width="20%">
+          <p style="float : none">
+            Lego Architecture
+            <br>
+            <strong>Londres</strong><br>
+            <em>Quantité : <span id="qte2">1</span></em>
+          </p>
+          <div class="float-right negatif" style="font-size : 40px">
+            <p><span id="prix2">49.99€</span></p>
+            <button type="button" class="btn btn-danger suppr" style="margin-top : 70px" onclick="supprimer(this.id)" id="suppr2">Supprimer <i class="fa fa-trash" aria-hidden="true"></i></button>
+            </div>
+        </li>
+      </ul>
+    </div>
+    <div class="col-lg-5 align-self-end">
+      <h1>Panier</h1>
+      <table class="table">
+        <tr style="font-size : 25px">
+          <th class="font-weight-normal">Prix du panier</th>
+          <th class="text-right font-weight-normal"><span id="prixPanier">99,98</span><span>€</span></th>
+        </tr>
+        <tr style="font-size : 12px">
+          <th class="font-weight-normal">TVA (15%)</th>
+          <th class="text-right font-weight-normal"><span id="tauxTVA">15</span><span>€</span></th>
+        </tr>
+        <tr style="font-size : 30px">
+          <th><p class="font-weight-normal">Total</p></th>
+          <th class="text-right font-weight-normal"><span id="prixTotal">114.98</span><span>€</span></th>
+        </tr>
+      </table>
+      <button type="button" class="btn btn-primary float-right" style="font-size : 30px">Acheter <i class="fa fa-check" aria-hidden="true"></i></button>
+    </div>
+    <div class="col-1"></div>
+  </div>
+  <!-- test panier dynamique
+  <div class="row">
+    <ul class="list-group">
+      <% panier.forEach( article => { %>
+        <li class="list-group-item" id="article1">
+          <img class="floatleft imgpanier" src="/images/<%=article.img%>" width="20%">
+          <p style="float : none">
+            Lego Architecture
+            <br>
+            <strong>New York City</strong><br>
+            <em>Quantité : <span id="qte1">1</span></em>
+          </p>
+          <div class="float-right negatif" style="font-size : 40px">
+            <p><span id="prix1"><%=article.price%> €</span></p>
+            <button type="button" class="btn btn-danger suppr" style="margin-top : 70px" onclick="supprimer(this.id)" id="suppr1">Supprimer <i class="fa fa-trash" aria-hidden="true"></i></button>
+          </div>
+        </li>
+      <% }); %>
+    </ul>-->
+  </div>
+</div>

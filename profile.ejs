@@ -1,0 +1,113 @@
+<div class="container-fluid p-3 p-md-5">
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-lg-8">
+      <% if ( status !== 'undefined' ) { %>
+        <% if ( status === 'successimg' ) { %>
+          <div class="alert alert-success">
+            <h5>Votre avatar a été modifié avec succès.</h5>
+          </div>
+        <% }; %>
+        <% if ( status === 'successtxt' ) { %>
+          <div class="alert alert-success">
+            <h5>Vos informations ont été modifiées avec succès.</h5>
+          </div>
+        <% }; %>
+        <% if ( status === 'errormail' ) { %>
+          <div class="alert alert-danger">
+            <h5>Erreur ! Cette adresse mail est déjà utilisée.</h5>
+          </div>
+        <% }; %>
+      <% }; %>
+      <div class="shadow p-3 mb-5 bg-white rounded text">
+        <div class="row">
+          <div class="col-lg-6">
+            <img src="<%= profil.profilepic %>" class="rounded float-left w-100">
+          </div>
+          <div class="col-lg-6">
+            <h2>Vos informations</h2>
+            <table class="table table-hover">
+              <thead>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Prénom</td>
+                  <td><%= profil.firstname %></td>
+                </tr>
+                <tr>
+                  <td>Nom</td>
+                  <td><%= profil.lastname %></td>
+                </tr>
+                <tr>
+                  <td>Adresse mail</td>
+                  <td><%= profil.email %></td>
+                </tr>
+                <tr>
+                  <td>Mot de passe</td>
+                  <td>
+                    <% let alpha = profil.passwd; %>
+                    <% for (var i = 0; i < alpha.length; i++) {%>
+                      <span>*</span>
+                    <% }; %>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#profileModal">Modifier votre avatar</button>
+            <br><br>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modifModal">Modifier vos informations</button>
+            <br><br>
+            <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#suppr">Supprimer mon compte</button>
+            <div id="suppr" class="collapse">
+              <br>
+              <div class="alert alert-danger">
+                <h6><strong>Attention !</strong> Voulez-vous vraiment supprimer votre compte ?</h6>
+                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#suppr">Non</button>
+                <form method="post" action="/suppression" style="display : inline">
+                  <button type="submit" class="btn btn-danger float-right">Oui j'en suis sûr</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="col-2"></div>
+  </div>
+</div>
+
+<%- include('modal_avatar.ejs') %>
+
+<div class="modal fade" id="modifModal">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+          
+      <div class="modal-header">
+        <h4 class="modal-title">Modifier vos informations</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+            
+      <div class="modal-body">
+        <form method="post" action="/modificata">
+          <div class="form-group">
+            <label for="modiffirstname">Nouveau prénom :</label>
+            <input type="text" class="form-control" name="modiffirstname" placeholder="Prénom" id="modiffirstname">
+          </div>
+          <div class="form-group">
+            <label for="modiflastname">Nouveau nom :</label>
+            <input type="text" class="form-control" name="modiflastname" placeholder="Nom" id="modiflastname">
+          </div>
+          <div class="form-group">
+            <label for="modifemail">Nouvelle adresse mail :</label>
+            <input type="email" class="form-control" name="modifmail" placeholder="Email" id="modifemail">
+          </div>
+          <div class="form-group">
+            <label for="modifmdp">Nouveau mot de passe :</label>
+            <input type="password" class="form-control" name="modifmdp" placeholder="Mot de passe" id="modifmdp">
+            <span onclick="afficherMDP()" id="toggleMDP">Afficher le mot de passe <i class="fas fa-eye-slash"></i></span>
+          </div>
+          <button type="submit" class="btn btn-primary float-right">Modifier</button>
+        </form>
+      </div>  
+    </div>
+  </div>
+</div>

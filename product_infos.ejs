@@ -1,0 +1,84 @@
+<div class="container-fluid p-5">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-lg-7">
+      <div class="row ">
+        <img id="imgproduit" src="<%=produits.img0%>" class="mx-auto d-block">
+      </div>
+      <div class="row pb-5">
+        <img class="miniature" id="mini1" onclick="changeimg(this)" src="<%=produits.img0%>" width="20%">
+
+        <img class="miniature" id="mini2" onclick="changeimg(this)" src="<%=produits.img1%>" width="20%">
+
+        <img class="miniature" id="mini3" onclick="changeimg(this)" src="<%=produits.img2%>" width="20%">
+
+        <img class="miniature" id="mini4" onclick="changeimg(this)" src="<%=produits.img3%>" width="20%">
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <p style="font-size : 45px"><%= produits.name2 %></p>
+      <p style="font-size : 45px"><%= produits.name %></p>
+      <hr>
+      <div style="font-size : 75px"><%= produits.price %>€</div>
+      <br>
+      <div class="alert alert-success text-right">
+        <strong>En stock</strong>
+      </div>
+      <hr>
+      <form method="post" action="/addpanier" style="display : inline">
+        <div class="text-right">
+          <button type="button" onclick="decrementValue()" value="increment" class="btn btn-outline-secondary">-</button>
+          <input type="numeric" class="btn btn-secondary" id="test" name="quantitepanier" value="1">
+          <button type="button" onclick="incrementValue()" value="decrement" class="btn btn-outline-secondary">+</button>
+          <br>
+          <br>
+          <button type="submit" class="btn btn-primary">
+            Ajouter au panier <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="col-1"></div>
+  </div>
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-lg-7">
+      <div class="text-justify">
+        <h3>Description</h3>
+        <%- produits.description %>
+      </div>
+      <h3>Spécificités</h3>
+      <%- produits.spec %>
+      <p>Source: Site officiel LEGO</p>
+    </div>
+  <div class="col-lg-3">
+    <h3>Avis</h3>
+    <div class="overflow-auto" style="height : 600px; overflow : scroll">
+      <table class="table table-striped" id="tableauAvis">
+        <% comm.forEach( comm => { %>
+          <tr>
+            <td>
+              <img src="<%=comm.img%>" alt="profilepic" class="profilepic">
+              <p style="font-weight : bold; margin-left : 1em"><%=comm.name%></p>
+              <p style="font-size : 14px; font-style: italic"><%=comm.date%></p>
+              <p><%= comm.content %></p>
+            </td>
+          </tr>
+        <% }); %>
+      </table>
+    </div>
+
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">
+          <i class="fas fa-pen" aria-hidden="true"></i>
+        </span>
+      </div>
+      <form method="post" name="creacomment" action="/newcomment" style="display : inline">
+        <input type="text" id="avis" class="form-control" class="text-justify" placeholder="Rédiger un avis" name="newcomment" onkeypress="submitcom(this)"/>
+      </form>
+
+    </div>
+  </div>
+  <div class="col-1"></div>
+</div>
